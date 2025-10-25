@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Draggable from 'react-draggable';
 
 const Window = ({ 
@@ -12,13 +12,17 @@ const Window = ({
   width = 600,
   height = 400
 }) => {
+  const nodeRef = useRef(null);
+  
   return (
     <Draggable
+      nodeRef={nodeRef}
       handle=".window-header"
       defaultPosition={defaultPosition}
       bounds="parent"
     >
       <div 
+        ref={nodeRef}
         className={`window ${isActive ? 'active' : ''}`}
         style={{ width: `${width}px`, height: `${height}px` }}
         onClick={() => onFocus(id)}
